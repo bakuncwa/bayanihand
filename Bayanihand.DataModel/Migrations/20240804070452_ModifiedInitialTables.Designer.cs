@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240804065847_CreatedInitialTables")]
-    partial class CreatedInitialTables
+    [Migration("20240804070452_ModifiedInitialTables")]
+    partial class ModifiedInitialTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,6 +296,9 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<string>("PaymentStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("hasPaid")
+                        .HasColumnType("bit");
 
                     b.HasKey("PaymentID");
 

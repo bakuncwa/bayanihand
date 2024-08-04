@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatedInitialTables : Migration
+    public partial class ModifiedInitialTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -146,7 +146,8 @@ namespace Bayanihand.DataModel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatePaid = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AmountPaid = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    AmountPaid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    hasPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

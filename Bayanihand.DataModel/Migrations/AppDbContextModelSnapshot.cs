@@ -294,6 +294,9 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("hasPaid")
+                        .HasColumnType("bit");
+
                     b.HasKey("PaymentID");
 
                     b.ToTable("PaymentProofINV");

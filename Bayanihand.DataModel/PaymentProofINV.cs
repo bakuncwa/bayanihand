@@ -14,5 +14,7 @@ namespace Bayanihand.DataModel
         public DateTime DatePaid { get; set; }
         public string PaymentStatus { get; set; } = string.Empty;
         public decimal AmountPaid { get; set; }
+
+        public bool hasPaid { get; set; }
     }
 }
