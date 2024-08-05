@@ -45,6 +45,16 @@ namespace Bayanihand.DataModel
 
             modelBuilder.Entity<ForumINV>().Property(s => s.DatePosted).HasColumnType("datetime2(7)");
             modelBuilder.Entity<ForumINV>().Property(s => s.DateEdited).HasColumnType("datetime2(7)").IsRequired(false);
+            // Customer can have many forum post
+            modelBuilder.Entity<ForumINV>().HasOne(p => p.Customer)
+                .WithMany(p => p.ForumPost).HasForeignKey(p => p.CustomerID).OnDelete(DeleteBehavior.Restrict);
+            // Forum post can have many handyman recommended
+            modelBuilder.Entity<HandymanINV>().HasOne(p => p.ForumPost)
+                .WithMany(p => p.Handyman).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+            // Forum post can have many applications submitted
+            modelBuilder.Entity<HandymanINV>().HasOne(p => p.ForumPost)
+                .WithMany(p => p.Handyman).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<InquiryINV>().Property(s => s.DateInquired).HasColumnType("datetime2(7)");
 
@@ -56,6 +66,8 @@ namespace Bayanihand.DataModel
             modelBuilder.Entity<ScheduleINV>().Property(s => s.DateBooked).HasColumnType("datetime2(7)");
             modelBuilder.Entity<ScheduleINV>().Property(s => s.StartTime).HasColumnType("datetime2(7)").IsRequired(false);
             modelBuilder.Entity<ScheduleINV>().Property(s => s.EndTime).HasColumnType("datetime2(7)").IsRequired(false);
+
+
 
         }
         public DbSet<HandymanINV> HandymanINV { get; set; }

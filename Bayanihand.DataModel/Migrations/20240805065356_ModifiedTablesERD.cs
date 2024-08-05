@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ModifiedInitialTables : Migration
+    public partial class ModifiedTablesERD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ApplicationINV",
-                columns: table => new
-                {
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateApplied = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    CV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationName = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApplicationINV", x => x.ApplicationID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "CheckInINV",
                 columns: table => new
@@ -51,7 +36,8 @@ namespace Bayanihand.DataModel.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GovID = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    GovID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isVerified = table.Column<bool>(type: "bit", nullable: false),
                     ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerESign = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -64,48 +50,6 @@ namespace Bayanihand.DataModel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CustomerINV", x => x.CustomerID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ForumINV",
-                columns: table => new
-                {
-                    ForumPostID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateCheckedOut = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DatePosted = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    DateEdited = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ForumINV", x => x.ForumPostID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HandymanINV",
-                columns: table => new
-                {
-                    HandymanID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GovID = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HandymanESign = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BarangayNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BarangayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ZIPCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HandymanINV", x => x.HandymanID);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,6 +132,96 @@ namespace Bayanihand.DataModel.Migrations
                 {
                     table.PrimaryKey("PK_ScheduleINV", x => x.ScheduleID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "ForumINV",
+                columns: table => new
+                {
+                    ForumPostID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCheckedOut = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DatePosted = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    DateEdited = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ForumINV", x => x.ForumPostID);
+                    table.ForeignKey(
+                        name: "FK_ForumINV_CustomerINV_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "CustomerINV",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApplicationINV",
+                columns: table => new
+                {
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateApplied = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    Title = table.Column<int>(type: "int", nullable: false),
+                    CV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ForumPostID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationINV", x => x.ApplicationID);
+                    table.ForeignKey(
+                        name: "FK_ApplicationINV_ForumINV_ForumPostID",
+                        column: x => x.ForumPostID,
+                        principalTable: "ForumINV",
+                        principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HandymanINV",
+                columns: table => new
+                {
+                    HandymanID = table.Column<int>(type: "int", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GovID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isVerified = table.Column<bool>(type: "bit", nullable: false),
+                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HandymanESign = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BarangayNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BarangayName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ZIPCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SalaryRange = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ForumPostID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HandymanINV", x => x.HandymanID);
+                    table.ForeignKey(
+                        name: "FK_HandymanINV_ForumINV_HandymanID",
+                        column: x => x.HandymanID,
+                        principalTable: "ForumINV",
+                        principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApplicationINV_ForumPostID",
+                table: "ApplicationINV",
+                column: "ForumPostID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ForumINV_CustomerID",
+                table: "ForumINV",
+                column: "CustomerID");
         }
 
         /// <inheritdoc />
@@ -198,12 +232,6 @@ namespace Bayanihand.DataModel.Migrations
 
             migrationBuilder.DropTable(
                 name: "CheckInINV");
-
-            migrationBuilder.DropTable(
-                name: "CustomerINV");
-
-            migrationBuilder.DropTable(
-                name: "ForumINV");
 
             migrationBuilder.DropTable(
                 name: "HandymanINV");
@@ -222,6 +250,12 @@ namespace Bayanihand.DataModel.Migrations
 
             migrationBuilder.DropTable(
                 name: "ScheduleINV");
+
+            migrationBuilder.DropTable(
+                name: "ForumINV");
+
+            migrationBuilder.DropTable(
+                name: "CustomerINV");
         }
     }
 }

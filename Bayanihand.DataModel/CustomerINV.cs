@@ -15,7 +15,8 @@ namespace Bayanihand.DataModel
         public string FirstName { get; set; } = string.Empty;
         public string ContactNo { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public byte[] GovID { get; set; }
+        public string GovID { get; set; }
+        public bool isVerified { get; set; }
         public string ProfilePhoto { get; set; } = string.Empty;
         public string CustomerESign { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
@@ -24,5 +25,9 @@ namespace Bayanihand.DataModel
         public string Region { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string ZIPCode { get; set; } = string.Empty;
+
+        // 1-to-many Relationships
+
+        public List<ForumINV> ForumPost { get; set; }
     }
 }
