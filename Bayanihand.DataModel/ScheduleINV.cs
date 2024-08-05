@@ -17,17 +17,5 @@ namespace Bayanihand.DataModel
         public DateTime? EndTime { get; set; }
         public bool hasStarted { get; set; }
         public bool hasEnded { get; set; }
-
-        // Foreign Keys
-        public ForumINV ForumPost { get; set; }
-        public int ForumPostID { get; set; }
-        public CustomerINV Customer { get; set; }
-        public int CustomerID { get; set; }
-        public HandymanINV Handyman { get; set; }
-        public int HandymanID { get; set; }
-
-        // 1-to-many Relationship
-        public List<CheckInINV> CheckIn { get; set; }
-
     }
 }

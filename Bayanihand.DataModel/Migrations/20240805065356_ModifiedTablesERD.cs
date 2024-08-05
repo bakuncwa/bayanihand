@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables10 : Migration
+    public partial class ModifiedTablesERD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -116,6 +116,24 @@ namespace Bayanihand.DataModel.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ScheduleINV",
+                columns: table => new
+                {
+                    ScheduleID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ScheduleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateBooked = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
+                    EndTime = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
+                    hasStarted = table.Column<bool>(type: "bit", nullable: false),
+                    hasEnded = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ScheduleINV", x => x.ScheduleID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ForumINV",
                 columns: table => new
                 {
@@ -195,98 +213,15 @@ namespace Bayanihand.DataModel.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ScheduleINV",
-                columns: table => new
-                {
-                    ScheduleID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScheduleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateBooked = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
-                    EndTime = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
-                    hasStarted = table.Column<bool>(type: "bit", nullable: false),
-                    hasEnded = table.Column<bool>(type: "bit", nullable: false),
-                    ForumPostID = table.Column<int>(type: "int", nullable: false),
-                    CustomerID = table.Column<int>(type: "int", nullable: false),
-                    HandymanID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ScheduleINV", x => x.ScheduleID);
-                    table.ForeignKey(
-                        name: "FK_ScheduleINV_CustomerINV_CustomerID",
-                        column: x => x.CustomerID,
-                        principalTable: "CustomerINV",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ScheduleINV_ForumINV_ForumPostID",
-                        column: x => x.ForumPostID,
-                        principalTable: "ForumINV",
-                        principalColumn: "ForumPostID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ScheduleINV_HandymanINV_HandymanID",
-                        column: x => x.HandymanID,
-                        principalTable: "HandymanINV",
-                        principalColumn: "HandymanID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CheckInINVScheduleINV",
-                columns: table => new
-                {
-                    CheckInID = table.Column<int>(type: "int", nullable: false),
-                    ScheduleID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CheckInINVScheduleINV", x => new { x.CheckInID, x.ScheduleID });
-                    table.ForeignKey(
-                        name: "FK_CheckInINVScheduleINV_CheckInINV_CheckInID",
-                        column: x => x.CheckInID,
-                        principalTable: "CheckInINV",
-                        principalColumn: "CheckInID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CheckInINVScheduleINV_ScheduleINV_ScheduleID",
-                        column: x => x.ScheduleID,
-                        principalTable: "ScheduleINV",
-                        principalColumn: "ScheduleID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationINV_ForumPostID",
                 table: "ApplicationINV",
                 column: "ForumPostID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckInINVScheduleINV_ScheduleID",
-                table: "CheckInINVScheduleINV",
-                column: "ScheduleID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ForumINV_CustomerID",
                 table: "ForumINV",
                 column: "CustomerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ScheduleINV_CustomerID",
-                table: "ScheduleINV",
-                column: "CustomerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ScheduleINV_ForumPostID",
-                table: "ScheduleINV",
-                column: "ForumPostID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ScheduleINV_HandymanID",
-                table: "ScheduleINV",
-                column: "HandymanID");
         }
 
         /// <inheritdoc />
@@ -296,7 +231,10 @@ namespace Bayanihand.DataModel.Migrations
                 name: "ApplicationINV");
 
             migrationBuilder.DropTable(
-                name: "CheckInINVScheduleINV");
+                name: "CheckInINV");
+
+            migrationBuilder.DropTable(
+                name: "HandymanINV");
 
             migrationBuilder.DropTable(
                 name: "InquiryINV");
@@ -311,13 +249,7 @@ namespace Bayanihand.DataModel.Migrations
                 name: "ReferralINV");
 
             migrationBuilder.DropTable(
-                name: "CheckInINV");
-
-            migrationBuilder.DropTable(
                 name: "ScheduleINV");
-
-            migrationBuilder.DropTable(
-                name: "HandymanINV");
 
             migrationBuilder.DropTable(
                 name: "ForumINV");
