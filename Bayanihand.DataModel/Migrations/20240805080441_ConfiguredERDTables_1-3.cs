@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables_12 : Migration
+    public partial class ConfiguredERDTables_13 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,23 +84,6 @@ namespace Bayanihand.DataModel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReferralINV",
-                columns: table => new
-                {
-                    ReferralID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateReferred = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    DateEdited = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
-                    ReferralVote = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReferralINV", x => x.ReferralID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ForumINV",
                 columns: table => new
                 {
@@ -112,7 +95,8 @@ namespace Bayanihand.DataModel.Migrations
                     DatePosted = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
                     DateEdited = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerID = table.Column<int>(type: "int", nullable: false)
+                    CustomerID = table.Column<int>(type: "int", nullable: false),
+                    ReferralID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,6 +162,43 @@ namespace Bayanihand.DataModel.Migrations
                         principalTable: "ForumINV",
                         principalColumn: "ForumPostID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReferralINV",
+                columns: table => new
+                {
+                    ReferralID = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateReferred = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    DateEdited = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
+                    ReferralVote = table.Column<int>(type: "int", nullable: false),
+                    CustomerID = table.Column<int>(type: "int", nullable: false),
+                    HandymanID = table.Column<int>(type: "int", nullable: false),
+                    ForumPostID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReferralINV", x => x.ReferralID);
+                    table.ForeignKey(
+                        name: "FK_ReferralINV_CustomerINV_CustomerID",
+                        column: x => x.CustomerID,
+                        principalTable: "CustomerINV",
+                        principalColumn: "CustomerID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReferralINV_ForumINV_ReferralID",
+                        column: x => x.ReferralID,
+                        principalTable: "ForumINV",
+                        principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ReferralINV_HandymanINV_HandymanID",
+                        column: x => x.HandymanID,
+                        principalTable: "HandymanINV",
+                        principalColumn: "HandymanID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,6 +278,16 @@ namespace Bayanihand.DataModel.Migrations
                 name: "IX_ForumINV_CustomerID",
                 table: "ForumINV",
                 column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReferralINV_CustomerID",
+                table: "ReferralINV",
+                column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReferralINV_HandymanID",
+                table: "ReferralINV",
+                column: "HandymanID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ScheduleINV_CustomerID",

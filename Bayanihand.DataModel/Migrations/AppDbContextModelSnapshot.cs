@@ -170,6 +170,9 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReferralID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -334,10 +337,10 @@ namespace Bayanihand.DataModel.Migrations
             modelBuilder.Entity("Bayanihand.DataModel.ReferralINV", b =>
                 {
                     b.Property<int>("ReferralID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReferralID"));
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DateEdited")
                         .HasColumnType("datetime2(7)");
@@ -349,6 +352,12 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ForumPostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ReferralVote")
                         .HasColumnType("int");
 
@@ -357,6 +366,10 @@ namespace Bayanihand.DataModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ReferralID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("HandymanID");
 
                     b.ToTable("ReferralINV");
                 });
@@ -455,6 +468,33 @@ namespace Bayanihand.DataModel.Migrations
                     b.Navigation("ForumPost");
                 });
 
+            modelBuilder.Entity("Bayanihand.DataModel.ReferralINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
+                        .WithMany("Referral")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("Referral")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.ForumINV", "ForumPost")
+                        .WithOne("Referral")
+                        .HasForeignKey("Bayanihand.DataModel.ReferralINV", "ReferralID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("ForumPost");
+
+                    b.Navigation("Handyman");
+                });
+
             modelBuilder.Entity("Bayanihand.DataModel.ScheduleINV", b =>
                 {
                     b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
@@ -486,6 +526,8 @@ namespace Bayanihand.DataModel.Migrations
                 {
                     b.Navigation("ForumPost");
 
+                    b.Navigation("Referral");
+
                     b.Navigation("Schedule");
                 });
 
@@ -495,11 +537,16 @@ namespace Bayanihand.DataModel.Migrations
 
                     b.Navigation("Handyman");
 
+                    b.Navigation("Referral")
+                        .IsRequired();
+
                     b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.HandymanINV", b =>
                 {
+                    b.Navigation("Referral");
+
                     b.Navigation("Schedule");
                 });
 

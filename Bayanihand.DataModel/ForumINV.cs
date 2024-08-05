@@ -22,6 +22,8 @@ namespace Bayanihand.DataModel
         // Foreign Keys
         public CustomerINV Customer { get; set; }
         public int CustomerID { get; set; }
+        public ReferralINV Referral { get; set; }
+        public int ReferralID { get; set; }
 
         // 1-to-many Relationship
         public List<HandymanINV> Handyman { get; set; }

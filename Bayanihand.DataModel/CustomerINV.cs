@@ -30,5 +30,6 @@ namespace Bayanihand.DataModel
 
         public List<ForumINV> ForumPost { get; set; }
         public List<ScheduleINV> Schedule { get; set; }
+        public List<ReferralINV> Referral { get; set; }
     }
 }
