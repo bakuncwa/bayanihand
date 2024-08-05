@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240805083551_ConfiguredERDTables_1-4")]
-    partial class ConfiguredERDTables_14
+    [Migration("20240805094104_ConfiguredERDTables_2-0")]
+    partial class ConfiguredERDTables_20
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,12 +43,17 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<int>("ForumPostID")
                         .HasColumnType("int");
 
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Title")
                         .HasColumnType("int");
 
                     b.HasKey("ApplicationID");
 
                     b.HasIndex("ForumPostID");
+
+                    b.HasIndex("HandymanID");
 
                     b.ToTable("ApplicationINV");
                 });
@@ -67,6 +72,9 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<DateTime?>("DateCheckedOut")
                         .HasColumnType("datetime2(7)");
 
+                    b.Property<int>("PaymentID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ScheduleID")
                         .HasColumnType("int");
 
@@ -74,6 +82,8 @@ namespace Bayanihand.DataModel.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("CheckInID");
+
+                    b.HasIndex("PaymentID");
 
                     b.HasIndex("ScheduleID")
                         .IsUnique();
@@ -129,9 +139,9 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ProfilePhoto")
+                    b.Property<string>("ProfilePhoto")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .IsRequired()
@@ -152,10 +162,7 @@ namespace Bayanihand.DataModel.Migrations
             modelBuilder.Entity("Bayanihand.DataModel.ForumINV", b =>
                 {
                     b.Property<int>("ForumPostID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ForumPostID"));
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
@@ -172,6 +179,9 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ReferralID")
                         .HasColumnType("int");
@@ -239,9 +249,9 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ProfilePhoto")
+                    b.Property<string>("ProfilePhoto")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Region")
                         .IsRequired()
@@ -270,6 +280,9 @@ namespace Bayanihand.DataModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InquiryID"));
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateInquired")
                         .HasColumnType("datetime2(7)");
 
@@ -277,11 +290,18 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("InquiryID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("HandymanID");
 
                     b.ToTable("InquiryINV");
                 });
@@ -332,8 +352,17 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<decimal>("AmountPaid")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DatePaid")
                         .HasColumnType("datetime2(7)");
+
+                    b.Property<int>("ForumPostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
 
                     b.Property<string>("PaymentStatus")
                         .IsRequired()
@@ -343,6 +372,10 @@ namespace Bayanihand.DataModel.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("PaymentID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("HandymanID");
 
                     b.ToTable("PaymentProofINV");
                 });
@@ -445,16 +478,32 @@ namespace Bayanihand.DataModel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("Application")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ForumPost");
+
+                    b.Navigation("Handyman");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.CheckInINV", b =>
                 {
+                    b.HasOne("Bayanihand.DataModel.PaymentProofINV", "Payment")
+                        .WithMany("CheckIn")
+                        .HasForeignKey("PaymentID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Bayanihand.DataModel.ScheduleINV", "Schedule")
                         .WithOne("CheckIn")
                         .HasForeignKey("Bayanihand.DataModel.CheckInINV", "ScheduleID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Payment");
 
                     b.Navigation("Schedule");
                 });
@@ -467,7 +516,15 @@ namespace Bayanihand.DataModel.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Bayanihand.DataModel.PaymentProofINV", "Payment")
+                        .WithOne("ForumPost")
+                        .HasForeignKey("Bayanihand.DataModel.ForumINV", "ForumPostID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.HandymanINV", b =>
@@ -479,6 +536,25 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired();
 
                     b.Navigation("ForumPost");
+                });
+
+            modelBuilder.Entity("Bayanihand.DataModel.InquiryINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
+                        .WithMany("Inquiry")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("Inquiry")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Handyman");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.JobClassINV", b =>
@@ -496,6 +572,25 @@ namespace Bayanihand.DataModel.Migrations
                         .IsRequired();
 
                     b.Navigation("ForumPost");
+
+                    b.Navigation("Handyman");
+                });
+
+            modelBuilder.Entity("Bayanihand.DataModel.PaymentProofINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
+                        .WithMany("Payment")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("Payment")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Handyman");
                 });
@@ -558,6 +653,10 @@ namespace Bayanihand.DataModel.Migrations
                 {
                     b.Navigation("ForumPost");
 
+                    b.Navigation("Inquiry");
+
+                    b.Navigation("Payment");
+
                     b.Navigation("Referral");
 
                     b.Navigation("Schedule");
@@ -579,11 +678,25 @@ namespace Bayanihand.DataModel.Migrations
 
             modelBuilder.Entity("Bayanihand.DataModel.HandymanINV", b =>
                 {
+                    b.Navigation("Application");
+
+                    b.Navigation("Inquiry");
+
                     b.Navigation("JobClass");
+
+                    b.Navigation("Payment");
 
                     b.Navigation("Referral");
 
                     b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("Bayanihand.DataModel.PaymentProofINV", b =>
+                {
+                    b.Navigation("CheckIn");
+
+                    b.Navigation("ForumPost")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.ScheduleINV", b =>

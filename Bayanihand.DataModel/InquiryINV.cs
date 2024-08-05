@@ -14,5 +14,11 @@ namespace Bayanihand.DataModel
         public DateTime DateInquired { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+
+        // Foreign Keys
+        public HandymanINV Handyman {  get; set; }
+        public int HandymanID { get; set; }
+        public CustomerINV Customer { get; set; }
+        public int CustomerID { get; set; }
     }
 }

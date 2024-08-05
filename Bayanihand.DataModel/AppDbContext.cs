@@ -94,6 +94,33 @@ namespace Bayanihand.DataModel
             modelBuilder.Entity<JobClassINV>().HasOne(p => p.ForumPost)
                 .WithMany(p => p.JobClass).HasForeignKey(p => p.ForumPostID).OnDelete(DeleteBehavior.Restrict);
 
+            // Handyman can have many applications
+            modelBuilder.Entity<ApplicationINV>().HasOne(p => p.Handyman)
+                .WithMany(p => p.Application).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+
+            // Handyman can have many inquiries
+            modelBuilder.Entity<InquiryINV>().HasOne(p => p.Handyman)
+                .WithMany(p => p.Inquiry).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+
+            // Customer can hae many inquiries
+            modelBuilder.Entity<InquiryINV>().HasOne(p => p.Customer)
+                .WithMany(p => p.Inquiry).HasForeignKey(p => p.CustomerID).OnDelete(DeleteBehavior.Restrict);
+
+            // Handyman can have many payments earned
+            modelBuilder.Entity<PaymentProofINV>().HasOne(p => p.Handyman)
+                .WithMany(p => p.Payment).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+
+            // Customer can have many payments made
+            modelBuilder.Entity<PaymentProofINV>().HasOne(p => p.Customer)
+                .WithMany(p => p.Payment).HasForeignKey(p => p.CustomerID).OnDelete(DeleteBehavior.Restrict);
+
+            // Payment can correspond to many check ins
+            modelBuilder.Entity<CheckInINV>().HasOne(p => p.Payment)
+                .WithMany(p => p.CheckIn).HasForeignKey(p => p.PaymentID).OnDelete(DeleteBehavior.Restrict);
+
+            // Forum post corresponds to only one payment 
+            modelBuilder.Entity<PaymentProofINV>().HasOne(p => p.ForumPost)
+                .WithOne(p => p.Payment).HasForeignKey<ForumINV>(p => p.ForumPostID).OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<HandymanINV> HandymanINV { get; set; }
         public DbSet<CustomerINV> CustomerINV { get; set; }

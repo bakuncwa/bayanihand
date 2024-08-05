@@ -19,6 +19,8 @@ namespace Bayanihand.DataModel
         // Foreign Keys
         public ForumINV ForumPost { get; set; }
         public int ForumPostID { get; set; }
+        public HandymanINV Handyman { get; set; }
+        public int HandymanID { get; set; }
 
     }
 }

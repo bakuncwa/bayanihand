@@ -17,7 +17,7 @@ namespace Bayanihand.DataModel
         public string Email { get; set;} = string.Empty;
         public string GovID { get; set; }
         public bool isVerified { get; set; }
-        public byte[] ProfilePhoto { get; set; }
+        public string ProfilePhoto { get; set; }
         public string HandymanESign { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string BarangayNo { get; set; } = string.Empty;
@@ -36,6 +36,8 @@ namespace Bayanihand.DataModel
         public List<ScheduleINV> Schedule { get; set; }
         public List<ReferralINV> Referral { get; set; }
         public List<JobClassINV> JobClass { get; set; }
-
+        public List<ApplicationINV> Application { get; set; }
+        public List<InquiryINV> Inquiry { get; set; }
+        public List<PaymentProofINV> Payment { get; set; }
     }
 }

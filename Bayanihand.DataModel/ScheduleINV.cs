@@ -29,6 +29,5 @@ namespace Bayanihand.DataModel
         public CheckInINV CheckIn { get; set; }
         public int CheckInID { get; set; }
 
-
     }
 }

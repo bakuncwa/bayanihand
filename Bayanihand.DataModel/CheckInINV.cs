@@ -16,5 +16,9 @@ namespace Bayanihand.DataModel
         public bool hasCheckedIn { get; set; }
         public ScheduleINV Schedule { get; set; }
         public int ScheduleID { get; set; }
+
+        // Foreign Keys
+        public PaymentProofINV Payment { get; set; }
+        public int PaymentID { get; set; }
     }
 }

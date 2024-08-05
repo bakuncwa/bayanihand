@@ -24,6 +24,8 @@ namespace Bayanihand.DataModel
         public int CustomerID { get; set; }
         public ReferralINV Referral { get; set; }
         public int ReferralID { get; set; }
+        public PaymentProofINV Payment { get; set; }
+        public int PaymentID { get; set; }
 
         // 1-to-many Relationship
         public List<HandymanINV> Handyman { get; set; }
