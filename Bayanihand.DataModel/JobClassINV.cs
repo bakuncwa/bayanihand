@@ -14,5 +14,11 @@ namespace Bayanihand.DataModel
         public string JobRole { get; set; } = string.Empty;
         public string JobExperience { get; set; } = string.Empty;
         public string JobField { get; set; } = string.Empty;
+
+        // Foreign Keys
+        public HandymanINV Handyman {  get; set; }
+        public int HandymanID { get; set; }
+        public ForumINV ForumPost { get; set; }
+        public int ForumPostID { get; set; } 
     }
 }

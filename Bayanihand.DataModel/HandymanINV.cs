@@ -35,6 +35,7 @@ namespace Bayanihand.DataModel
         // 1-to-many Relationship
         public List<ScheduleINV> Schedule { get; set; }
         public List<ReferralINV> Referral { get; set; }
+        public List<JobClassINV> JobClass { get; set; }
 
     }
 }

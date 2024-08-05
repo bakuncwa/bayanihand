@@ -291,6 +291,12 @@ namespace Bayanihand.DataModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobClassID"));
 
+                    b.Property<int>("ForumPostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
+
                     b.Property<string>("JobExperience")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -304,6 +310,10 @@ namespace Bayanihand.DataModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("JobClassID");
+
+                    b.HasIndex("ForumPostID");
+
+                    b.HasIndex("HandymanID");
 
                     b.ToTable("JobClassINV");
                 });
@@ -468,6 +478,25 @@ namespace Bayanihand.DataModel.Migrations
                     b.Navigation("ForumPost");
                 });
 
+            modelBuilder.Entity("Bayanihand.DataModel.JobClassINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.ForumINV", "ForumPost")
+                        .WithMany("JobClass")
+                        .HasForeignKey("ForumPostID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("JobClass")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ForumPost");
+
+                    b.Navigation("Handyman");
+                });
+
             modelBuilder.Entity("Bayanihand.DataModel.ReferralINV", b =>
                 {
                     b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
@@ -537,6 +566,8 @@ namespace Bayanihand.DataModel.Migrations
 
                     b.Navigation("Handyman");
 
+                    b.Navigation("JobClass");
+
                     b.Navigation("Referral")
                         .IsRequired();
 
@@ -545,6 +576,8 @@ namespace Bayanihand.DataModel.Migrations
 
             modelBuilder.Entity("Bayanihand.DataModel.HandymanINV", b =>
                 {
+                    b.Navigation("JobClass");
+
                     b.Navigation("Referral");
 
                     b.Navigation("Schedule");

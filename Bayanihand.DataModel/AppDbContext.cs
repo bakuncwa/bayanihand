@@ -87,6 +87,13 @@ namespace Bayanihand.DataModel
             modelBuilder.Entity<CheckInINV>().HasOne(p => p.Schedule)
                 .WithOne(p => p.CheckIn).HasForeignKey<CheckInINV>(p => p.ScheduleID).OnDelete(DeleteBehavior.Restrict);
 
+            // Handyman can have many job classes
+            modelBuilder.Entity<JobClassINV>().HasOne(p => p.Handyman)
+                .WithMany(p => p.JobClass).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+            // Forum post can have many job classes
+            modelBuilder.Entity<JobClassINV>().HasOne(p => p.ForumPost)
+                .WithMany(p => p.JobClass).HasForeignKey(p => p.ForumPostID).OnDelete(DeleteBehavior.Restrict);
+
         }
         public DbSet<HandymanINV> HandymanINV { get; set; }
         public DbSet<CustomerINV> CustomerINV { get; set; }

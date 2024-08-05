@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables_13 : Migration
+    public partial class ConfiguredERDTables_14 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,21 +50,6 @@ namespace Bayanihand.DataModel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InquiryINV", x => x.InquiryID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "JobClassINV",
-                columns: table => new
-                {
-                    JobClassID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    JobRole = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobExperience = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobField = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobClassINV", x => x.JobClassID);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,6 +146,35 @@ namespace Bayanihand.DataModel.Migrations
                         column: x => x.HandymanID,
                         principalTable: "ForumINV",
                         principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobClassINV",
+                columns: table => new
+                {
+                    JobClassID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    JobRole = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobExperience = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobField = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HandymanID = table.Column<int>(type: "int", nullable: false),
+                    ForumPostID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobClassINV", x => x.JobClassID);
+                    table.ForeignKey(
+                        name: "FK_JobClassINV_ForumINV_ForumPostID",
+                        column: x => x.ForumPostID,
+                        principalTable: "ForumINV",
+                        principalColumn: "ForumPostID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_JobClassINV_HandymanINV_HandymanID",
+                        column: x => x.HandymanID,
+                        principalTable: "HandymanINV",
+                        principalColumn: "HandymanID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -278,6 +292,16 @@ namespace Bayanihand.DataModel.Migrations
                 name: "IX_ForumINV_CustomerID",
                 table: "ForumINV",
                 column: "CustomerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobClassINV_ForumPostID",
+                table: "JobClassINV",
+                column: "ForumPostID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobClassINV_HandymanID",
+                table: "JobClassINV",
+                column: "HandymanID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReferralINV_CustomerID",

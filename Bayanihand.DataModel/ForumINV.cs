@@ -29,5 +29,6 @@ namespace Bayanihand.DataModel
         public List<HandymanINV> Handyman { get; set; }
         public List<ApplicationINV> Application { get; set; }
         public List<ScheduleINV> Schedule { get; set; }
+        public List<JobClassINV> JobClass { get; set; }
     }
 }
