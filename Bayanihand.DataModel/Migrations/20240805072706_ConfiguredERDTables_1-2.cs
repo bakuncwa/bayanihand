@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables10 : Migration
+    public partial class ConfiguredERDTables_12 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "CheckInINV",
-                columns: table => new
-                {
-                    CheckInID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DateCheckedIn = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    DateCheckedOut = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
-                    hasCheckedIn = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CheckInINV", x => x.CheckInID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "CustomerINV",
                 columns: table => new
@@ -38,7 +23,7 @@ namespace Bayanihand.DataModel.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GovID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isVerified = table.Column<bool>(type: "bit", nullable: false),
-                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfilePhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CustomerESign = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BarangayNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -173,7 +158,7 @@ namespace Bayanihand.DataModel.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GovID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isVerified = table.Column<bool>(type: "bit", nullable: false),
-                    ProfilePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProfilePhoto = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     HandymanESign = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BarangayNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -209,7 +194,8 @@ namespace Bayanihand.DataModel.Migrations
                     hasEnded = table.Column<bool>(type: "bit", nullable: false),
                     ForumPostID = table.Column<int>(type: "int", nullable: false),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
-                    HandymanID = table.Column<int>(type: "int", nullable: false)
+                    HandymanID = table.Column<int>(type: "int", nullable: false),
+                    CheckInID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,43 +205,41 @@ namespace Bayanihand.DataModel.Migrations
                         column: x => x.CustomerID,
                         principalTable: "CustomerINV",
                         principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ScheduleINV_ForumINV_ForumPostID",
                         column: x => x.ForumPostID,
                         principalTable: "ForumINV",
                         principalColumn: "ForumPostID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ScheduleINV_HandymanINV_HandymanID",
                         column: x => x.HandymanID,
                         principalTable: "HandymanINV",
                         principalColumn: "HandymanID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CheckInINVScheduleINV",
+                name: "CheckInINV",
                 columns: table => new
                 {
-                    CheckInID = table.Column<int>(type: "int", nullable: false),
+                    CheckInID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateCheckedIn = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
+                    DateCheckedOut = table.Column<DateTime>(type: "datetime2(7)", nullable: true),
+                    hasCheckedIn = table.Column<bool>(type: "bit", nullable: false),
                     ScheduleID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CheckInINVScheduleINV", x => new { x.CheckInID, x.ScheduleID });
+                    table.PrimaryKey("PK_CheckInINV", x => x.CheckInID);
                     table.ForeignKey(
-                        name: "FK_CheckInINVScheduleINV_CheckInINV_CheckInID",
-                        column: x => x.CheckInID,
-                        principalTable: "CheckInINV",
-                        principalColumn: "CheckInID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CheckInINVScheduleINV_ScheduleINV_ScheduleID",
+                        name: "FK_CheckInINV_ScheduleINV_ScheduleID",
                         column: x => x.ScheduleID,
                         principalTable: "ScheduleINV",
                         principalColumn: "ScheduleID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -264,9 +248,10 @@ namespace Bayanihand.DataModel.Migrations
                 column: "ForumPostID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckInINVScheduleINV_ScheduleID",
-                table: "CheckInINVScheduleINV",
-                column: "ScheduleID");
+                name: "IX_CheckInINV_ScheduleID",
+                table: "CheckInINV",
+                column: "ScheduleID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ForumINV_CustomerID",
@@ -296,7 +281,7 @@ namespace Bayanihand.DataModel.Migrations
                 name: "ApplicationINV");
 
             migrationBuilder.DropTable(
-                name: "CheckInINVScheduleINV");
+                name: "CheckInINV");
 
             migrationBuilder.DropTable(
                 name: "InquiryINV");
@@ -309,9 +294,6 @@ namespace Bayanihand.DataModel.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReferralINV");
-
-            migrationBuilder.DropTable(
-                name: "CheckInINV");
 
             migrationBuilder.DropTable(
                 name: "ScheduleINV");

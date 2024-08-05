@@ -66,8 +66,18 @@ namespace Bayanihand.DataModel
             modelBuilder.Entity<ScheduleINV>().Property(s => s.DateBooked).HasColumnType("datetime2(7)");
             modelBuilder.Entity<ScheduleINV>().Property(s => s.StartTime).HasColumnType("datetime2(7)").IsRequired(false);
             modelBuilder.Entity<ScheduleINV>().Property(s => s.EndTime).HasColumnType("datetime2(7)").IsRequired(false);
-
-
+            // Forum post can have many schedule
+            modelBuilder.Entity<ScheduleINV>().HasOne(p => p.ForumPost)
+                .WithMany(p => p.Schedule).HasForeignKey(p => p.ForumPostID).OnDelete(DeleteBehavior.Restrict);
+            // Handyman can have many schedule
+            modelBuilder.Entity<ScheduleINV>().HasOne(p => p.Handyman)
+                .WithMany(p => p.Schedule).HasForeignKey(p => p.HandymanID).OnDelete(DeleteBehavior.Restrict);
+            // Customer can have many schedule
+            modelBuilder.Entity<ScheduleINV>().HasOne(p => p.Customer)
+                .WithMany(p => p.Schedule).HasForeignKey(p => p.CustomerID).OnDelete(DeleteBehavior.Restrict);
+            // Schedule can have one check-in
+            modelBuilder.Entity<CheckInINV>().HasOne(p => p.Schedule)
+                .WithOne(p => p.CheckIn).HasForeignKey<CheckInINV>(p => p.ScheduleID).OnDelete(DeleteBehavior.Restrict);
 
         }
         public DbSet<HandymanINV> HandymanINV { get; set; }

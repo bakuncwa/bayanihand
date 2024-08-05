@@ -17,7 +17,7 @@ namespace Bayanihand.DataModel
         public string Email { get; set;} = string.Empty;
         public string GovID { get; set; }
         public bool isVerified { get; set; }
-        public string ProfilePhoto {  get; set; } = string.Empty;
+        public byte[] ProfilePhoto { get; set; }
         public string HandymanESign { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string BarangayNo { get; set; } = string.Empty;

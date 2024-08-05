@@ -26,8 +26,9 @@ namespace Bayanihand.DataModel
         public HandymanINV Handyman { get; set; }
         public int HandymanID { get; set; }
 
-        // 1-to-many Relationship
-        public List<CheckInINV> CheckIn { get; set; }
+        public CheckInINV CheckIn { get; set; }
+        public int CheckInID { get; set; }
+
 
     }
 }
