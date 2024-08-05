@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240805065356_ModifiedTablesERD")]
-    partial class ModifiedTablesERD
+    [Migration("20240805070429_ConfiguredERDTables-1.0")]
+    partial class ConfiguredERDTables10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,11 +366,20 @@ namespace Bayanihand.DataModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleID"));
 
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateBooked")
                         .HasColumnType("datetime2(7)");
 
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2(7)");
+
+                    b.Property<int>("ForumPostID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HandymanID")
+                        .HasColumnType("int");
 
                     b.Property<string>("ScheduleName")
                         .IsRequired()
@@ -387,7 +396,28 @@ namespace Bayanihand.DataModel.Migrations
 
                     b.HasKey("ScheduleID");
 
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("ForumPostID");
+
+                    b.HasIndex("HandymanID");
+
                     b.ToTable("ScheduleINV");
+                });
+
+            modelBuilder.Entity("CheckInINVScheduleINV", b =>
+                {
+                    b.Property<int>("CheckInID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CheckInID", "ScheduleID");
+
+                    b.HasIndex("ScheduleID");
+
+                    b.ToTable("CheckInINVScheduleINV");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.ApplicationINV", b =>
@@ -423,9 +453,53 @@ namespace Bayanihand.DataModel.Migrations
                     b.Navigation("ForumPost");
                 });
 
+            modelBuilder.Entity("Bayanihand.DataModel.ScheduleINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.CustomerINV", "Customer")
+                        .WithMany("Schedule")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.ForumINV", "ForumPost")
+                        .WithMany("Schedule")
+                        .HasForeignKey("ForumPostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.HandymanINV", "Handyman")
+                        .WithMany("Schedule")
+                        .HasForeignKey("HandymanID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("ForumPost");
+
+                    b.Navigation("Handyman");
+                });
+
+            modelBuilder.Entity("CheckInINVScheduleINV", b =>
+                {
+                    b.HasOne("Bayanihand.DataModel.CheckInINV", null)
+                        .WithMany()
+                        .HasForeignKey("CheckInID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bayanihand.DataModel.ScheduleINV", null)
+                        .WithMany()
+                        .HasForeignKey("ScheduleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Bayanihand.DataModel.CustomerINV", b =>
                 {
                     b.Navigation("ForumPost");
+
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("Bayanihand.DataModel.ForumINV", b =>
@@ -433,6 +507,13 @@ namespace Bayanihand.DataModel.Migrations
                     b.Navigation("Application");
 
                     b.Navigation("Handyman");
+
+                    b.Navigation("Schedule");
+                });
+
+            modelBuilder.Entity("Bayanihand.DataModel.HandymanINV", b =>
+                {
+                    b.Navigation("Schedule");
                 });
 #pragma warning restore 612, 618
         }

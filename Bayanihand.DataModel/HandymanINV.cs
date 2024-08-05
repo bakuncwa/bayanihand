@@ -32,5 +32,8 @@ namespace Bayanihand.DataModel
         public ForumINV ForumPost { get; set; }
         public int ForumPostID { get; set; }
 
+        // 1-to-many Relationship
+        public List<ScheduleINV> Schedule { get; set; }
+
     }
 }
