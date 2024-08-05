@@ -13,7 +13,9 @@ namespace Bayanihand.DataModel
         public int CheckInID;
         public DateTime DateCheckedIn {  get; set; }
         public DateTime? DateCheckedOut { get; set; }
-
         public bool hasCheckedIn { get; set; }
+
+        // 1-to-many Relationship
+        public List<ScheduleINV> Schedule {  get; set; }
     }
 }
