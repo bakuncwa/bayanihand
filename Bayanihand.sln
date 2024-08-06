@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bayanihand.DataModel", "Bay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.App", "Bayanihand.App\Bayanihand.App.csproj", "{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.Repository", "Bayanihand.Repository\Bayanihand.Repository.csproj", "{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
