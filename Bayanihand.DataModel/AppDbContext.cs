@@ -23,6 +23,9 @@ namespace Bayanihand.DataModel
                 "trustservercertificate=true");
 
             // Gamoras
+            optionsBuilder.UseSqlServer("server=LAPTOP-FRGK3TF6\\SQLEXPRESS; " +
+                "database=ENTPROG-Finals; Integrated Securty=true; " +
+                "trustservercertificate=true");
 
             // Hacinas
 
