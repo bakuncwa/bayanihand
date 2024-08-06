@@ -1,3 +1,4 @@
+using Bayanihand.App.Configuration;
 using Bayanihand.DataModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,9 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration.GetConnectionString("Gamoras"));
 });
+
+//Service to use Automapper
+builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
