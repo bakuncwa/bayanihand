@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240805094104_ConfiguredERDTables_2-0")]
-    partial class ConfiguredERDTables_20
+    [Migration("20240806162839_ConfiguredERDTables_2-1")]
+    partial class ConfiguredERDTables_21
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,6 +258,9 @@ namespace Bayanihand.DataModel.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SalaryRange")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("YearsOfExperience")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ZIPCode")

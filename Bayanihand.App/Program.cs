@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Service to use AppDbContext
 builder.Services.AddDbContext<AppDbContext>(opts =>
 {
-    opts.UseSqlServer(builder.Configuration.GetConnectionString("Gamoras"));
+    opts.UseSqlServer(builder.Configuration.GetConnectionString("Almirol"));
 });
 
 //Service to use Automapper

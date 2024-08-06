@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables_20 : Migration
+    public partial class ConfiguredERDTables_21 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -117,6 +117,7 @@ namespace Bayanihand.DataModel.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZIPCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SalaryRange = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    YearsOfExperience = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ForumPostID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

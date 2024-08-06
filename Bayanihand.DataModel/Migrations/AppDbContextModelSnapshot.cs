@@ -257,6 +257,9 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<decimal>("SalaryRange")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("YearsOfExperience")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ZIPCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

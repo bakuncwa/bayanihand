@@ -25,8 +25,9 @@ namespace Bayanihand.DataModel
         public string Region { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string ZIPCode { get; set; } = string.Empty;
-
         public decimal SalaryRange { get; set; }
+
+        public decimal YearsOfExperience { get; set; }
 
         // Foreign Keys
         public ForumINV ForumPost { get; set; }
