@@ -16,24 +16,27 @@ namespace Bayanihand.DataModel
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Almirol
-            //optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
-            //    "database=almirol_entprog; uid=eisensy_student; " +
-            //    "pwd=Benilde@2020; integrated security=sspi; " +
-            //    "trustservercertificate=true");
+            if (!optionsBuilder.IsConfigured)
+            {
+                // Almirol
+                //optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
+                //    "database=almirol_entprog; uid=eisensy_student; " +
+                //    "pwd=Benilde@2020; integrated security=sspi; " +
+                //    "trustservercertificate=true");
 
-            // Gamoras
-            optionsBuilder.UseSqlServer("server=LAPTOP-FRGK3TF6\\SQLEXPRESS; " +
-                "database=ENTPROG-Finals; Integrated Security=true; " +
-                "trustservercertificate=true");
+                // Gamoras
+                optionsBuilder.UseSqlServer("server=LAPTOP-FRGK3TF6\\SQLEXPRESS; " +
+                    "database=ENTPROG-Finals; Integrated Security=true; " +
+                    "trustservercertificate=true");
 
-            // Hacinas
+                // Hacinas
 
-            // Lab
-            //optionsBuilder.UseSqlServer("server=DESKTOP-EDG1IN1\\SQLEXPRESS; " +
-            //    "database=eisensy_csbentprog; uid=eisensy_student; " +
-            //    "pwd=Benilde@2020; integrated security=sspi; " +
-            //    "trustservercertificate=true");
+                // Lab
+                //optionsBuilder.UseSqlServer("server=DESKTOP-EDG1IN1\\SQLEXPRESS; " +
+                //    "database=eisensy_csbentprog; uid=eisensy_student; " +
+                //    "pwd=Benilde@2020; integrated security=sspi; " +
+                //    "trustservercertificate=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
