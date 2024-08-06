@@ -1,4 +1,13 @@
+using Bayanihand.DataModel;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Service to use AppDbContext
+builder.Services.AddDbContext<AppDbContext>(opts =>
+{
+    opts.UseSqlServer(builder.Configuration.GetConnectionString("Gamoras"));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
