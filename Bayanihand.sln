@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.DataModel", "Bayanihand.DataModel\Bayanihand.DataModel.csproj", "{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bayanihand.DataModel", "Bayanihand.DataModel\Bayanihand.DataModel.csproj", "{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.App", "Bayanihand.App\Bayanihand.App.csproj", "{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
