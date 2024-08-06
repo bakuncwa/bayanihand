@@ -17,14 +17,14 @@ namespace Bayanihand.DataModel
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Almirol
-            optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
-                "database=almirol_entprog; uid=eisensy_student; " +
-                "pwd=Benilde@2020; integrated security=sspi; " +
-                "trustservercertificate=true");
+            //optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
+            //    "database=almirol_entprog; uid=eisensy_student; " +
+            //    "pwd=Benilde@2020; integrated security=sspi; " +
+            //    "trustservercertificate=true");
 
             // Gamoras
             optionsBuilder.UseSqlServer("server=LAPTOP-FRGK3TF6\\SQLEXPRESS; " +
-                "database=ENTPROG-Finals; Integrated Securty=true; " +
+                "database=ENTPROG-Finals; Integrated Security=true; " +
                 "trustservercertificate=true");
 
             // Hacinas
