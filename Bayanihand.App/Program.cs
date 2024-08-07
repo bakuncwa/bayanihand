@@ -22,8 +22,9 @@ namespace Bayanihand.App
             builder.Services.AddAutoMapper(typeof(AutomapperConfig));
           
           //Service for Repository
-builder.Services.AddScoped<IForumRepo, ForumRepo>();
-          
+            builder.Services.AddScoped<IForumRepo, ForumRepo>();
+            builder.Services.AddScoped<IAdminRepo, AdminRepo>();
+
             //Add service for Microsoft Identity
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {

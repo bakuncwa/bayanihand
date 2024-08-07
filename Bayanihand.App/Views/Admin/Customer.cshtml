@@ -29,13 +29,40 @@
                 <td>@item.CustomerID</td>
                 <td>@item.Description</td>
                 <td>
-                    <a asp-controller="Admin" asp-action="Delete"
-                       asp-route-Id="@item.HandymanID"
-                       class="btn btn-outline-warning btn-sm">
+                    <button type="submit"
+                            class="btn btn-outline-danger btnDelete"
+                            data-id="@item.InquiryID">
+                        <i class="fas fa-remove"></i>
                         Delete
-                    </a>
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<form id="DeleteForm" asp-controller="Admin" asp-action="Delete" method="post">
+    <input type="hidden" id="FollowUpID" name="Id" value="" />
+</form>
+
+@section Scripts {
+    <script>
+        $('.btnDelete').click(function (e) {
+            var btn = $(this);
+            var id = btn.data("id");
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this record?",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonColor: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#FollowUpID").val(id);
+                    $("#DeleteForm").submit();
+                }
+            });
+        });
+    </script>
+}
