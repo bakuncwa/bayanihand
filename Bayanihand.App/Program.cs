@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Service to use AppDbContext
 builder.Services.AddDbContext<AppDbContext>(opts =>
 {
-    opts.UseSqlServer(builder.Configuration.GetConnectionString("Hacinas"));
+    opts.UseSqlServer(builder.Configuration.GetConnectionString("Almirol"));
 });
 
 //Service to use Automapper
@@ -56,7 +56,14 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope()) 
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    
+
+    var roles = new[] { "Admin" };
+
+    foreach(var r in roles) 
+    {
+        if (! await roleManager.RoleExistsAsync(r))
+            await roleManager.CreateAsync(new IdentityRole(r));
+    }
 }
 
     app.Run();
