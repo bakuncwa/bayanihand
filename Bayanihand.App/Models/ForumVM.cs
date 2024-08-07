@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bayanihand.DataModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bayanihand.App.Models
 {
