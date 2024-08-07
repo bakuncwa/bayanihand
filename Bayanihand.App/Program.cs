@@ -1,5 +1,6 @@
 using Bayanihand.App.Configuration;
 using Bayanihand.DataModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,19 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 
 //Service to use Automapper
 builder.Services.AddAutoMapper(typeof(AutomapperConfig));
+
+//Add service for Microsoft Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+    {
+        //Configure authentication requirements
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 5;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+    }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -39,4 +53,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Landing}/{action=Index}/{id?}");
 
-app.Run();
+using (var scope = app.Services.CreateScope()) 
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    
+}
+
+    app.Run();
