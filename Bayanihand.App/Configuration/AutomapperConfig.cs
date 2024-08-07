@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Bayanihand.App.Models;
+using Bayanihand.DataModel;
 
 namespace Bayanihand.App.Configuration
 {
@@ -6,7 +8,7 @@ namespace Bayanihand.App.Configuration
     {
         public AutomapperConfig()
         {
-
+            CreateMap<ForumINV, ForumVM>().ReverseMap();
         }
     }
 }
