@@ -10,13 +10,17 @@ namespace Bayanihand.App.Controllers
     {
         private readonly AppDbContext dbc;
         private readonly IMapper mapper;
-        private readonly IForumRepo repo;
+        private readonly IForumRepo repoForum;
+        private readonly ISchedRepo repoSched;
+        private readonly IPaymentRepo repoPay;
 
-        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repo)
+        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum, ISchedRepo repoSched, IPaymentRepo repoPay)
         {
             this.dbc = dbc;
             this.mapper = mapper;
-            this.repo = repo;
+            this.repoForum = repoForum;
+            this.repoSched = repoSched;
+            this.repoPay = repoPay;
         }
         public async Task<IActionResult> Forum()
         {
@@ -50,7 +54,7 @@ namespace Bayanihand.App.Controllers
                     model.DatePosted = DateTime.Now;
                     model.Status = "Open";
                 
-                    await repo.AddAsync(mapper.Map<ForumINV>(model));
+                    await repoForum.AddAsync(mapper.Map<ForumINV>(model));
 
                     return RedirectToAction("Forum");
                 }
@@ -70,11 +74,11 @@ namespace Bayanihand.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteForum(int Id)
         {
-            ForumINV? f = await repo.GetAsync(Id);
+            ForumINV? f = await repoForum.GetAsync(Id);
 
             if (f != null)
             {
-                await repo.DeleteAsync(Id);
+                await repoForum.DeleteAsync(Id);
             }
 
             return RedirectToAction("Forum");
@@ -87,7 +91,7 @@ namespace Bayanihand.App.Controllers
                 return RedirectToAction("Forum");
             }
 
-            ForumINV? f = await repo.GetAsync(Id);
+            ForumINV? f = await repoForum.GetAsync(Id);
 
             if (f == null)
             {
@@ -105,7 +109,7 @@ namespace Bayanihand.App.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await repo.UpdateAsync(mapper.Map<ForumINV>(model));
+                    await repoForum.UpdateAsync(mapper.Map<ForumINV>(model));
 
                     return RedirectToAction("Forum");
                 }
@@ -141,6 +145,70 @@ namespace Bayanihand.App.Controllers
             //var applicantsList = new List<ApplicationINV> { applicant };
 
             return View(new List<ApplicationINV>());
+        }
+
+        public IActionResult JobSchedule()
+        {
+            //populating data for checking
+            var schedData = new ScheduleVM
+            {
+                ScheduleName = "Plumbing D:",
+                DateBooked = new DateTime(2024, 8, 12),
+                StartTime = new DateTime(2024, 8, 12, 14, 12, 02),
+                Status = "Checked In"
+            };
+
+            var schedList = new List<ScheduleVM> { schedData };
+            //return View(mapper.Map<List<ForumVM>>(await repo.GetAllAsync()));
+            return View(schedList);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckIn(int ScheduleID)
+        {
+            //ScheduleINV data = await repoSched.GetAsync(ScheduleID);
+            
+            ScheduleVM model = new();
+            
+            model.Status = "Checked In";
+
+            return RedirectToAction("JobSchedule", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Void(int ScheduleId)
+        {
+            ScheduleVM model = new();
+
+            model.Status = "Void";
+
+            return RedirectToAction("JobSchedule", model);
+        }
+
+        public IActionResult Payment()
+        {
+            return View(new PaymentVM());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Payment(PaymentVM model)
+        {
+            model.DatePaid = DateTime.Now;
+            model.hasPaid = true;
+
+            if (ModelState.IsValid)
+            {
+                await repoPay.AddAsync(mapper.Map<PaymentProofINV>(model));
+
+                return View();
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Bayanihand.App.Configuration
             CreateMap<ForumINV, ForumVM>().ReverseMap();
             CreateMap<HandymanINV, HandymanProfileVM>().ReverseMap();
             CreateMap<CustomerINV, CustomerProfileVM>().ReverseMap();
+            CreateMap<ScheduleINV, ScheduleVM>().ReverseMap();
+            CreateMap<PaymentProofINV, PaymentVM>().ReverseMap();
         }
     }
 }

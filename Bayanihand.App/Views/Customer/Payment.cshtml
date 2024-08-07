@@ -1,0 +1,28 @@
+﻿@model PaymentVM
+
+<h3>Payment Form</h3>
+<hr />
+
+<form asp-controller="Customer" asp-action="Payment" method="post">
+    Date Paid: @Model.DatePaid
+    <br />
+    <label asp-for="AmountPaid"></label>
+    <input asp-for="AmountPaid" class="form-control" />
+    <br />
+
+    <a asp-controller="Customer" asp-action="JobSchedule" class="btn btn-info">
+        Go Back
+    </a>
+    <button id="btnRating" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRating"> <!--Triggers Modal for Rating-->
+        Submit Payment
+    </button>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="modalRating" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <partial name="_HandymanRating" model="Model" />
+        </div>
+    </div>
+</div>
