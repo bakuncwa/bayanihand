@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Bayanihand.DataModel\Bayanihand.DataModel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Customer\" />
-  </ItemGroup>
-
 </Project>
