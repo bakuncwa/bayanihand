@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bayanihand.DataModel\Bayanihand.DataModel.csproj" />
+    <ProjectReference Include="..\Bayanihand.Repository\Bayanihand.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
