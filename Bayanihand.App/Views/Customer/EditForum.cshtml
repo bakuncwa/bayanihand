@@ -1,0 +1,25 @@
+﻿﻿
+@model ForumVM
+
+<h3>Edit your Post</h3>
+
+<form asp-controller="Customer" asp-action="EditForum" method="post">
+    <div asp-validation-summary="All" class="text text-danger"></div>
+    <input asp-for="ForumPostID" type="hidden" class="form-control" value="@Model.ForumPostID" />
+
+    <label asp-for="Title"></label>
+    <input asp-for="Title" class="form-control" value="@Model.Title" />
+    <br/>
+    <label asp-for="Description"></label>
+    <textarea id="PostDescription" name="PostDescription" row="4" cols="50">
+        <input asp-for="Description" class="form-control" />
+    </textarea>    
+    <br />
+    
+    <a asp-controller="Customer" asp-action="Forum" class="btn btn-secondary">
+        Cancel
+    </a>
+    <button type="submit" class="btn btn-primary">
+        Update Post
+    </button>
+</form>
