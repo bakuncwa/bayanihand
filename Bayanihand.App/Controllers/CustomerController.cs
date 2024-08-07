@@ -20,7 +20,18 @@ namespace Bayanihand.App.Controllers
         }
         public async Task<IActionResult> Forum()
         {
-            return View(mapper.Map<List<ForumVM>>(await repo.GetAllAsync()));
+            //populating data for checking
+            var forumData = new ForumVM
+            {
+                DatePosted = DateTime.Now,
+                Title = "Plumbing",
+                Description = "Broken Faucet",
+                Status = "Open"
+            };
+
+            var forumList = new List<ForumVM> { forumData }; 
+            //return View(mapper.Map<List<ForumVM>>(await repo.GetAllAsync()));
+            return View(forumList);
         }
 
         public IActionResult AddForum()

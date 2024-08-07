@@ -45,7 +45,7 @@
                     <a asp-controller="Customer" asp-action="EditForum" asp-route-id="@item.ForumPostID" class="btn btn-secondary">
                         Edit Post
                     </a>
-                    <button type="submit" class="btn btn-danger btnDeleteForum" data-fid="@item.ForumPostID">
+                    <button type="submit" class="btn btn-danger btnDeleteForum" data-id="@item.ForumPostID">
                         Delete Post
                     </button>
                 </td>
@@ -60,20 +60,22 @@
 
 @section Scripts{
     <script>
-        let table = new DataTable('#tblForum');
+        // let table = new DataTable('#tblForum');
 
         $('.btnDeleteForum').click(function (e) {
+
             var btn = $(this);
-            var id = btn.data('ForumPostID')
+            var id = btn.data('id')
+
             Swal.fire({
                 title: "Are you sure?",
                 text: "Deleting a post cannot be undone",
                 icon: "warning",
-                arguments: true
+                showCancelButton: true
             }).then((confirm) => {
                 if (confirm.isConfirmed) {
                     $('#ForumPostID').val(id);
-                    $('#DeleteForum')
+                    $('#DeleteForum').submit();
                 }
             });
         });
