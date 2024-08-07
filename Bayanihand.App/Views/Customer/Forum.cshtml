@@ -1,0 +1,83 @@
+﻿@model List<ForumVM>
+
+<h3>Job Listing Forum</h3>
+
+<a asp-controller="Landing" asp-action="Index" class="btn btn-info" method="post">
+    Go back
+</a>
+<a asp-controller="Customer" asp-action="AddForum" class="btn btn-success" method="post">
+    Post a Handy Job
+</a>
+
+<br/>
+<br/>
+
+<div class="alert alert-info">
+    @Model.Count result(s) found
+</div>
+
+<table id="tblForum" class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Job</th>
+            <th>Date Posted</th>
+            <th>Date Edited</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ForumVM item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>Job Type</td>
+                <td>@item.DatePosted</td>
+                <td>@item.DateEdited</td>
+                <td>@item.Status</td>
+                <td>
+                    <a asp-controller="Customer" asp-action="ViewApplicants" class="btn btn-info">
+                        Applicants
+                    </a>
+                    <a asp-controller="Customer" asp-action="EditForum" asp-route-id="@item.ForumPostID" class="btn btn-secondary">
+                        Edit Post
+                    </a>
+                    <button type="submit" class="btn btn-danger btnDeleteForum" data-id="@item.ForumPostID">
+                        Delete Post
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="DeleteForum" asp-controller="Customer" asp-action="DeleteForum" method="post">
+    <input type="hidden" id="ForumPostID" name="Id" value="" />
+</form>
+
+@section Scripts{
+    <script>
+        // let table = new DataTable('#tblForum');
+
+        $('.btnDeleteForum').click(function (e) {
+
+            var btn = $(this);
+            var id = btn.data('id')
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Deleting a post cannot be undone",
+                icon: "warning",
+                showCancelButton: true
+            }).then((confirm) => {
+                if (confirm.isConfirmed) {
+                    $('#ForumPostID').val(id);
+                    $('#DeleteForum').submit();
+                }
+            });
+        });
+    </script>
+}

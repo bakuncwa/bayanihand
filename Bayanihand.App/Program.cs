@@ -1,4 +1,5 @@
 using Bayanihand.App.Configuration;
+using Bayanihand.App.Models.Repositories;
 using Bayanihand.DataModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,15 @@ namespace Bayanihand.App
             //Service to use AppDbContext
             builder.Services.AddDbContext<AppDbContext>(opts =>
             {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("Almirol"));
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("Hacinas"));
             });
 
             //Service to use Automapper
             builder.Services.AddAutoMapper(typeof(AutomapperConfig));
+          
+          //Service for Repository
+            builder.Services.AddScoped<IForumRepo, ForumRepo>();
+            builder.Services.AddScoped<IAdminRepo, AdminRepo>();
 
             //Add service for Microsoft Identity
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
