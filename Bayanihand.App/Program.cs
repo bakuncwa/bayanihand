@@ -59,16 +59,38 @@ namespace Bayanihand.App
                 name: "default",
                 pattern: "{controller=Landing}/{action=Index}/{id?}");
 
+
+            // Data Seeding for Admin Role
+
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                var roles = new[] { "Admin" };
+                var roles = new[] { "Admin", "Handyman", "Customer" };
 
                 foreach (var r in roles)
                 {
                     if (!await roleManager.RoleExistsAsync(r))
                         await roleManager.CreateAsync(new IdentityRole(r));
+                }
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+                string email = "admin@gmail.com";
+                string password = "Bayanihand2024!";
+
+                if (await userManager.FindByEmailAsync(email) == null) 
+                {
+                    var user = new IdentityUser();
+                    user.UserName = email;
+                    user.Email = email;
+
+                    await userManager.CreateAsync(user, password);
+
+                    await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
 
