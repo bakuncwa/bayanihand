@@ -30,10 +30,6 @@ namespace Bayanihand.DataModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationID"));
 
-                    b.Property<string>("CV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateApplied")
                         .HasColumnType("datetime2(7)");
 
@@ -43,9 +39,8 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<int>("HandymanID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("hasApplied")
+                        .HasColumnType("bit");
 
                     b.HasKey("ApplicationID");
 

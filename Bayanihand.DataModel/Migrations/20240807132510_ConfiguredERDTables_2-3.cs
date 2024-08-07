@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredERDTables_22 : Migration
+    public partial class ConfiguredERDTables_23 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -189,8 +189,7 @@ namespace Bayanihand.DataModel.Migrations
                     ApplicationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateApplied = table.Column<DateTime>(type: "datetime2(7)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    hasApplied = table.Column<bool>(type: "bit", nullable: false),
                     ForumPostID = table.Column<int>(type: "int", nullable: false),
                     HandymanID = table.Column<int>(type: "int", nullable: false)
                 },

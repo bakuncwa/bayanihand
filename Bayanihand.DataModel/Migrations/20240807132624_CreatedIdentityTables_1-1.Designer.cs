@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240807130654_ConfiguredIdentityTables_1-0")]
-    partial class ConfiguredIdentityTables_10
+    [Migration("20240807132624_CreatedIdentityTables_1-1")]
+    partial class CreatedIdentityTables_11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,6 @@ namespace Bayanihand.DataModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationID"));
 
-                    b.Property<string>("CV")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateApplied")
                         .HasColumnType("datetime2(7)");
 
@@ -46,9 +42,8 @@ namespace Bayanihand.DataModel.Migrations
                     b.Property<int>("HandymanID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("hasApplied")
+                        .HasColumnType("bit");
 
                     b.HasKey("ApplicationID");
 

@@ -5,7 +5,7 @@
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfiguredIdentityTables_10 : Migration
+    public partial class CreatedIdentityTables_11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
