@@ -103,12 +103,13 @@ namespace Bayanihand.App.Controllers
                     return View(model);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("Error", ex.Message);
                 return View(model);
             }
-            
+        }
+
         public IActionResult Index()
         {
             return View();
