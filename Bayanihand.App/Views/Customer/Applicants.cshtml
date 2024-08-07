@@ -31,9 +31,7 @@
             <tr>
                 <td>@item.ApplicationID</td>
                 <td>@item.DateApplied</td>
-                <td>@item.Title</td>
                 <td>(ID:@item.HandymanID) @item.Handyman</td>
-                <td>@item.CV</td>
                 <td>
                     <a asp-controller="Customer" asp-action="Schedule"
                        asp-route-Id="@item.HandymanID"
