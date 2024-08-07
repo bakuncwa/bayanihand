@@ -1,7 +1,5 @@
 using Bayanihand.App.Configuration;
-using Bayanihand.App.Models.Repository;
 using Bayanihand.DataModel;
-using Bayanihand.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,11 +19,6 @@ namespace Bayanihand.App
 
             //Service to use Automapper
             builder.Services.AddAutoMapper(typeof(AutomapperConfig));
-
-            // Add service for the repository
-            builder.Services.AddScoped<IHandymanRepository, HandymanRepository>();
-            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-            builder.Services.AddScoped<IForumRepository, ForumRepository>();
 
             //Add service for Microsoft Identity
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
