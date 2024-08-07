@@ -13,8 +13,7 @@ namespace Bayanihand.DataModel
         public int ApplicationID { get; set; }
         public DateTime DateApplied { get; set; }
 
-        public int Title { get; set; }
-        public string CV { get; set; } = string.Empty;
+        public bool hasApplied { get; set; }
 
         // Foreign Keys
         public ForumINV ForumPost { get; set; }

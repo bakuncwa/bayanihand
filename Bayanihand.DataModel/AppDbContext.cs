@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bayanihand.DataModel
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public AppDbContext() { }
         public AppDbContext(DbContextOptions options) : base(options)
@@ -30,6 +31,10 @@ namespace Bayanihand.DataModel
                     "trustservercertificate=true");
 
                 // Hacinas
+                optionsBuilder.UseSqlServer(
+                "Server=DESKTOP-5FF6P8K\\SQLEXPRESS;" +
+                "Database=ENTPROG-Finals; Integrated Security=SSPI;" +
+                "TrustServerCertificate=true");
 
                 // Lab
                 //optionsBuilder.UseSqlServer("server=DESKTOP-EDG1IN1\\SQLEXPRESS; " +
