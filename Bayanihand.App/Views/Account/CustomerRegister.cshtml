@@ -1,0 +1,40 @@
+﻿@model CustomerRegisterVM
+
+<form asp-controller="Account" asp-action="CustomerRegister" method="post">
+
+    <div class="vstack gap-3 col-lg-12" style="padding-top: 5vh; padding-bottom: 5vh; padding-left: 30vw; padding-right: 30vw;">
+
+        <span style="color: #5188F5"><h3>Register to <span style="color: #FF911F"><b><i>Hire</i></b></span></h3></span>
+
+        <label asp-for="FirstName" style="color: #5188F5"><b>First Name</b></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+
+        <label asp-for="LastName" style="color: #5188F5"><b>Last Name</b></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+
+        <label asp-for="Email" style="color: #5188F5"><b>Email</b></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <label asp-for="Password" style="color: #5188F5"><b>Password</b></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <label asp-for="ConfirmPassword" style="color: #5188F5"><b>Confirm Password</b></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-outline-primary" style="color: #FF911F" value="CustomerRegister">
+            <i class="fa-solid fa-user"></i>
+            Register
+        </button>
+        <a asp-controller="Landing" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            Back
+        </a>
+
+    </div>
+
+</form>

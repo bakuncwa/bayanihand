@@ -9,6 +9,8 @@ namespace Bayanihand.App.Configuration
         public AutomapperConfig()
         {
             CreateMap<ForumINV, ForumVM>().ReverseMap();
+            CreateMap<HandymanINV, HandymanProfileVM>().ReverseMap();
+            CreateMap<CustomerINV, CustomerProfileVM>().ReverseMap();
         }
     }
 }
