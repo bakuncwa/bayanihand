@@ -60,7 +60,7 @@ namespace Bayanihand.App.Controllers
                     var handymanINV = _mapper.Map<HandymanINV>(model);
                     await _repo.AddAsync(handymanINV);
 
-                    return RedirectToAction("CreateProfile");
+                    return RedirectToAction("Profile");
                 }
                 else
                 {
