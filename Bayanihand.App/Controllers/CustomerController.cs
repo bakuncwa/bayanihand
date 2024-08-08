@@ -159,6 +159,35 @@ namespace Bayanihand.App.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddFollowUp(InquiryVM model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    InquiryINV entity = mapper.Map<InquiryINV>(model);
+                    entity.DateInquired = DateTime.Now;
+                    entity.HandymanID = 1; 
+                    entity.CustomerID = 1; 
+
+                    await aDrepo.AddAsync(entity);
+
+                    return RedirectToAction("JobSchedule");
+                }
+                else
+                {
+                    return View("FollowUp", model);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+                return View("FollowUp", model);
+            }
+        }
+
         public IActionResult JobSchedule()
         {
             //populating data for checking
