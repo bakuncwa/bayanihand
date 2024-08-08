@@ -22,6 +22,8 @@ namespace Bayanihand.App.Controllers
             this.repoSched = repoSched;
             this.repoPay = repoPay;
         }
+
+        //Forum Actions -----------------------------------------------
         public async Task<IActionResult> Forum()
         {
             //populating data for checking
@@ -47,8 +49,8 @@ namespace Bayanihand.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddForum(ForumVM model)
         {
-            //try
-            //{
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     model.DatePosted = DateTime.Now;
@@ -62,12 +64,12 @@ namespace Bayanihand.App.Controllers
                 {
                     return View(model);
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ModelState.AddModelError("Error", ex.Message);
-            //    return View(model);
-            //}
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+                return View(model);
+            }
         }
 
         [HttpPost]
@@ -125,11 +127,13 @@ namespace Bayanihand.App.Controllers
             }
         }
 
+        //??? --------------------------------------------------------
         public IActionResult Index()
         {
             return View();
         }
 
+        //Applicants Actions ------------------------------------------------------
         public IActionResult Applicants()
         {
             //populating data for checking
@@ -146,11 +150,13 @@ namespace Bayanihand.App.Controllers
             return View(applicantsList);
         }
 
+        //FollowUp Actions ------------------------------------------------------
         public IActionResult FollowUp()
         {
             return View();
         }
 
+        //Job Sched Actions -------------------------------------------------
         public IActionResult JobSchedule()
         {
             //populating data for checking
@@ -191,6 +197,7 @@ namespace Bayanihand.App.Controllers
             return RedirectToAction("JobSchedule", model);
         }
 
+        //Payment Actions ---------------------------------------------------
         public IActionResult Payment()
         {
             return View(new PaymentVM());
