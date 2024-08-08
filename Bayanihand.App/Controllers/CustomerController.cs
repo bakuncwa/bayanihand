@@ -13,14 +13,17 @@ namespace Bayanihand.App.Controllers
         private readonly IForumRepo repoForum;
         private readonly ISchedRepo repoSched;
         private readonly IPaymentRepo repoPay;
+        private readonly IAdminRepo aDrepo;
 
-        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum, ISchedRepo repoSched, IPaymentRepo repoPay)
+        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum, 
+            ISchedRepo repoSched, IPaymentRepo repoPay, IAdminRepo ADrepo)
         {
             this.dbc = dbc;
             this.mapper = mapper;
             this.repoForum = repoForum;
             this.repoSched = repoSched;
             this.repoPay = repoPay;
+            aDrepo = ADrepo;
         }
 
         //Forum Actions -----------------------------------------------
@@ -156,7 +159,6 @@ namespace Bayanihand.App.Controllers
             return View();
         }
 
-        //Job Sched Actions -------------------------------------------------
         public IActionResult JobSchedule()
         {
             //populating data for checking
@@ -221,5 +223,7 @@ namespace Bayanihand.App.Controllers
                 return View(model);
             }
         }
+
+
     }
 }

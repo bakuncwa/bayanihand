@@ -1,4 +1,4 @@
-﻿@model List<InquiryINV>
+﻿@model List<InquiryVM>
 
 <h3>Handyman Follow Ups</h3>
 <hr />
@@ -20,13 +20,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (InquiryINV item in Model)
+        @foreach (InquiryVM item in Model)
         {
             <tr>
                 <td>@item.InquiryID</td>
                 <td>@item.DateInquired</td>
                 <td>@item.Title</td>
-                <td>@item.HandymanID</td>
+                <td></td>
                 <td>@item.Description</td>
                 <td>
                 <button type="submit"

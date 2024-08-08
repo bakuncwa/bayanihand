@@ -13,6 +13,7 @@ namespace Bayanihand.App.Configuration
             CreateMap<CustomerINV, CustomerProfileVM>().ReverseMap();
             CreateMap<ScheduleINV, ScheduleVM>().ReverseMap();
             CreateMap<PaymentProofINV, PaymentVM>().ReverseMap();
+            CreateMap<InquiryINV, InquiryVM>().ReverseMap();
         }
     }
 }

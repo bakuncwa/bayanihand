@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bayanihand.App.Models;
 using Bayanihand.App.Models.Repositories;
 using Bayanihand.DataModel;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +23,13 @@ namespace Bayanihand.App.Controllers
         public IActionResult Customer()
         {
             //populating data for checking
-            var customerINQ = new InquiryINV
+            var customerINQ = new InquiryVM
             {
                 DateInquired = DateTime.Now,
                 Title = "Bad Handyman",
                 Description = "Construction Worker",
             };
-            var customerList = new List<InquiryINV> { customerINQ };
+            var customerList = new List<InquiryVM> { customerINQ };
 
             return View(customerList);
         }
@@ -36,13 +37,13 @@ namespace Bayanihand.App.Controllers
         public IActionResult Handyman()
         {
             //populating data for checking
-            var handymanINQ = new InquiryINV
+            var handymanINQ = new InquiryVM
             {
                 DateInquired = DateTime.Now,
                 Title = "Bad Customer",
                 Description = "Construction Worker",
             };
-            var handymanList = new List<InquiryINV> { handymanINQ };
+            var handymanList = new List<InquiryVM> { handymanINQ };
 
             return View(handymanList);
         }
