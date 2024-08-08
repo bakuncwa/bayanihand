@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240807132624_CreatedIdentityTables_1-1")]
-    partial class CreatedIdentityTables_11
+    [Migration("20240808083919_ERD-and-Identity-Tables_1-0")]
+    partial class ERDandIdentityTables_10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

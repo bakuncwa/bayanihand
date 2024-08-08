@@ -4,6 +4,8 @@ using Bayanihand.DataModel;
 using Bayanihand.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Bayanihand.App.Controllers
 {
@@ -21,10 +23,18 @@ namespace Bayanihand.App.Controllers
 
         [Authorize(Roles = "Handyman")]
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> Profile()
+        public async Task<IActionResult> ViewProfile()
         {
             var HandymanINV = await _repo.GetAllAsync();
             return View(_mapper.Map<List<HandymanProfileVM>>(HandymanINV));
         }
+
+
+        //public async Task<HandymanINV?> GetProfileByUserIdAsync(string userId)
+        //{
+        //    return await _mapper.HandymanINV
+        //        .FirstOrDefaultAsync(h => h.UserId == userId);
+        //}
+
     }
 }

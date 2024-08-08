@@ -9,5 +9,6 @@ namespace Bayanihand.Repository
 {
     public interface IHandymanRepository : IGenericRepository<HandymanINV>
     {
+        //Task<HandymanINV?> GetProfileByUserIdAsync(string ID);
     }
 }

@@ -17,7 +17,7 @@ namespace Bayanihand.App
             //Service to use AppDbContext
             builder.Services.AddDbContext<AppDbContext>(opts =>
             {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("Hacinas"));
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("Almirol"));
             });
 
             //Service to use Automapper
@@ -42,7 +42,7 @@ namespace Bayanihand.App
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireNonAlphanumeric = true;
-            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders(); ;
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -64,6 +64,7 @@ namespace Bayanihand.App
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
