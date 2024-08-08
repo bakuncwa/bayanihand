@@ -1,0 +1,27 @@
+﻿@model InquiryINV
+
+<h3>Follow Up Form</h3>
+<br />
+
+<form asp-controller="Customer" asp-action="FollowUp" method="post">
+    <div asp-validation-summary="All" class="text text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control form-control-sm" />
+    </div>
+    <br />
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control form-control-sm" rows="3"></textarea>
+    </div>
+    <br />
+
+    <a asp-controller="Customer" asp-action="JobSchedule" class="btn btn-secondary">
+        Go Back
+    </a>
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+</form>

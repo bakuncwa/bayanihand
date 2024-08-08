@@ -19,9 +19,8 @@
         <tr>
             <th>Application I.D.</th>
             <th>Date Applied</th>
-            <th>Title</th>
+            <th>Has Applied</th>
             <th>Handyman</th>
-            <th>CV</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -31,9 +30,10 @@
             <tr>
                 <td>@item.ApplicationID</td>
                 <td>@item.DateApplied</td>
+                <td>@item.hasApplied</td>
                 <td>(ID:@item.HandymanID) @item.Handyman</td>
                 <td>
-                    <a asp-controller="Customer" asp-action="Schedule"
+                    <a asp-controller="Customer" asp-action="JobSchedule"
                        asp-route-Id="@item.HandymanID"
                        class="btn btn-outline-success btn-sm">
                         <i class="fas fa-edit"></i>

@@ -17,7 +17,7 @@ namespace Bayanihand.App
             //Service to use AppDbContext
             builder.Services.AddDbContext<AppDbContext>(opts =>
             {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("Almirol"));
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("Hacinas"));
             });
 
             //Service to use Automapper
@@ -26,6 +26,8 @@ namespace Bayanihand.App
           //Service for Repository
             builder.Services.AddScoped<IForumRepo, ForumRepo>();
             builder.Services.AddScoped<IAdminRepo, AdminRepo>();
+            builder.Services.AddScoped<ISchedRepo, SchedRepo>();
+            builder.Services.AddScoped<IPaymentRepo, PaymentRepo>();
             builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
             builder.Services.AddScoped<IHandymanRepository, HandymanRepository>();
 
