@@ -1,17 +1,28 @@
 ﻿@model List<ScheduleVM>
 
-<h3>Booked Jobs Schedule</h3>
+<span style="color: #5188F5">
+    <h3>
+        <b>
+            <i class="fa fa-calendar-check"></i>
+            Booked Jobs Schedules
+        </b>
+    </h3>
+</span>
 <hr />
 
-<a asp-controller="Landing" asp-action="Index" class="btn btn-info" method="post">
-    Go back
-</a>
-
-<br />
-<br />
-
-<div class="alert alert-info">
-    @Model.Count result(s) found
+<div class="container">
+    <div class="row mb-3 align-items-center">
+        <div class="col">
+            <a asp-controller="Landing" asp-action="Index" class="btn btn-secondary">
+                Go back
+            </a>
+        </div>
+        <div class="col text-end">
+            <div class="alert alert-info mb-0 w-100 text-center">
+                @Model.Count result(s) found
+            </div>
+        </div>
+    </div>
 </div>
 
 <table id="tblSched" class="table table-striped table-hover table-bordered">
@@ -51,12 +62,12 @@
 
                     @if (item.Status == "Checked In")
                     {
-                        <a asp-controller="Customer" asp-action="Payment" asp-route-id="@item.ScheduleID" class="btn btn-secondary btn-sm">
+                        <a asp-controller="Customer" asp-action="Payment" asp-route-id="@item.ScheduleID" class="btn btn-outline-info btn-sm">
                             Payment
                         </a>
                     }
 
-                    <a asp-controller="Customer" asp-action="FollowUp" asp-route-id="@item.ScheduleID" class="btn btn-secondary btn-sm">
+                    <a asp-controller="Customer" asp-action="FollowUp" asp-route-id="@item.ScheduleID" class="btn btn-outline-warning btn-sm">
                         Follow Up
                     </a>
                 </td>

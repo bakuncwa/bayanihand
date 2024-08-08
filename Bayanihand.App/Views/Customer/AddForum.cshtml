@@ -1,11 +1,16 @@
 ﻿@model ForumVM
 
- <h3>
-     Post a Job
- </h3>
-
+<span style="color: #5188F5">
+    <h3>
+        <b>
+            <i class="fa fa-home"></i>
+            Post a Handy Job
+        </b>
+    </h3>
+</span>
  <hr/>
 
+<span style="color: black">
 <form asp-controller="Customer" asp-action="AddForum" method="post">
     <div asp-validation-summary ="All" class="text text-danger"></div> 
 
@@ -30,3 +35,4 @@
         Post
     </button>
 </form>
+<span style="color: black">

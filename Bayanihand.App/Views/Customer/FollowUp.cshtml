@@ -1,8 +1,16 @@
 ﻿@model InquiryVM
 
-<h3>Follow Up Form</h3>
+<span style="color: #5188F5">
+    <h3>
+        <b>
+            <i class="fa fa-chevron-circle-up"></i>
+            Follow Up
+        </b>
+    </h3>
+</span>
 <hr />
 
+<span style="color: black">
 <form asp-controller="Customer" asp-action="AddFollowUp" method="post">
     <div asp-validation-summary="All" class="text text-danger"></div>
 
@@ -27,5 +35,5 @@
     <button type="submit" class="btn btn-primary">
         Submit
     </button>
-
 </form>
+</span>

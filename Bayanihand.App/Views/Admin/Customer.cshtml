@@ -1,12 +1,28 @@
 ﻿@model List<InquiryVM>
 
-<h3>Customer Follow Ups</h3>
+<span style="color: #5188F5">
+    <h3>
+        <b>
+            <i class="fa fa-users"></i>
+            Customer Follow Ups
+        </b>
+    </h3>
+</span>
 <hr />
 
-<div class="alert alert-info">
-    @Model.Count result(s) found
+<div class="container">
+    <div class="row mb-3 align-items-center">
+        <div class="col">
+        </div>
+        <div class="col text-center">
+            <div class="alert alert-info mb-0 w-100 text-center">
+                @Model.Count result(s) found
+            </div>
+            <div class="col text-end">
+            </div>
+        </div>
+    </div>
 </div>
-<br />
 
 <table class="table table-striped table-hover table-bordered table-sm">
     <thead>
@@ -30,7 +46,7 @@
                 <td>@item.Description</td>
                 <td>
                     <button type="submit"
-                            class="btn btn-outline-danger btnDelete"
+                            class="btn btn-outline-danger btn-sm btnDelete"
                             data-id="@item.InquiryID">
                         <i class="fas fa-remove"></i>
                         Delete

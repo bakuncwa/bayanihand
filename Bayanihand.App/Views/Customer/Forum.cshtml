@@ -1,19 +1,33 @@
 ﻿@model List<ForumVM>
 
-<h3>Job Listing Forum</h3>
+<span style="color: #5188F5">
+    <h3>
+        <b>
+            <i class="fas fa-table"></i>
+            Job Listing Forum
+        </b>
+    </h3>
+</span>
+<hr />
 
-<a asp-controller="Landing" asp-action="Index" class="btn btn-info" method="post">
-    Go back
-</a>
-<a asp-controller="Customer" asp-action="AddForum" class="btn btn-success" method="post">
-    Post a Handy Job
-</a>
-
-<br/>
-<br/>
-
-<div class="alert alert-info">
-    @Model.Count result(s) found
+<div class="container">
+    <div class="row mb-3 align-items-center">
+        <div class="col">
+            <a asp-controller="Landing" asp-action="Index" class="btn btn-secondary">
+                Go back
+            </a>
+        </div>
+        <div class="col text-center">
+            <div class="alert alert-info mb-0">
+                @Model.Count result(s) found
+            </div>
+        </div>
+        <div class="col text-end">
+            <a asp-controller="Customer" asp-action="AddForum" class="btn btn-success">
+                Post a Handy Job
+            </a>
+        </div>
+    </div>
 </div>
 
 <table id="tblForum" class="table table-striped table-hover table-bordered">
@@ -39,13 +53,13 @@
                 <td>@item.DateEdited</td>
                 <td>@item.Status</td>
                 <td>
-                    <a asp-controller="Customer" asp-action="Applicants" class="btn btn-info">
+                    <a asp-controller="Customer" asp-action="Applicants" class="btn btn-outline-custom btn-sm">
                         Applicants
                     </a>
-                    <a asp-controller="Customer" asp-action="EditForum" asp-route-id="@item.ForumPostID" class="btn btn-secondary">
+                    <a asp-controller="Customer" asp-action="EditForum" asp-route-id="@item.ForumPostID" class="btn btn-outline-info btn-sm">
                         Edit Post
                     </a>
-                    <button type="submit" class="btn btn-danger btnDeleteForum" data-id="@item.ForumPostID">
+                    <button type="submit" class="btn btn-outline-danger btn-sm btnDeleteForum" data-id="@item.ForumPostID">
                         Delete Post
                     </button>
                 </td>
@@ -81,3 +95,17 @@
         });
     </script>
 }
+
+<style>
+    .btn-outline-custom {
+        border: 1px solid #FF911F; /* Border color */
+        color: #FF911F; /* Text color */
+        background-color: transparent; /* Background color */
+    }
+
+     .btn-outline-custom:hover {
+        background-color: #FF911F;
+        color: white;
+        }
+
+</style>

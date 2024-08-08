@@ -17,7 +17,7 @@ namespace Bayanihand.App
             //Service to use AppDbContext
             builder.Services.AddDbContext<AppDbContext>(opts =>
             {
-                opts.UseSqlServer(builder.Configuration.GetConnectionString("Gamoras"));
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("Hacinas"));
             });
 
             //Service to use Automapper
