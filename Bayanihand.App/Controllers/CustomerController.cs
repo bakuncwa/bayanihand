@@ -15,11 +15,7 @@ namespace Bayanihand.App.Controllers
         private readonly IPaymentRepo repoPay;
         private readonly IAdminRepo aDrepo;
 
-<<<<<<< HEAD
         public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum,
-=======
-        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum, 
->>>>>>> 1e0270f0eba07c853fc24663380a31d80329038d
             ISchedRepo repoSched, IPaymentRepo repoPay, IAdminRepo ADrepo)
         {
             this.dbc = dbc;
@@ -173,13 +169,8 @@ namespace Bayanihand.App.Controllers
                 {
                     InquiryINV entity = mapper.Map<InquiryINV>(model);
                     entity.DateInquired = DateTime.Now;
-<<<<<<< HEAD
-                    entity.HandymanID = 1;
-                    entity.CustomerID = 1;
-=======
                     entity.HandymanID = 1; 
                     entity.CustomerID = 1; 
->>>>>>> 1e0270f0eba07c853fc24663380a31d80329038d
 
                     await aDrepo.AddAsync(entity);
 
