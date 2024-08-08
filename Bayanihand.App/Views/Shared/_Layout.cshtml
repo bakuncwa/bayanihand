@@ -27,7 +27,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Applicants">Applicants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="FollowUp">Follow Up</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="JobSchedule">Booking Schedules</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Customer">Admin (Customer)</a>
@@ -35,16 +35,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Handyman">Admin (Handyman)</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="JobSchedule">Booking Schedules</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3"
             @RenderBody()
         </main>
     </div>

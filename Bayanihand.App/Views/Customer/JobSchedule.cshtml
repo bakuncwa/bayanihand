@@ -55,6 +55,10 @@
                             Payment
                         </a>
                     }
+
+                    <a asp-controller="Customer" asp-action="FollowUp" asp-route-id="@item.ScheduleID" class="btn btn-secondary btn-sm">
+                        Follow Up
+                    </a>
                 </td>
             </tr>
         }
