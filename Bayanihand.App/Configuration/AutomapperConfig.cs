@@ -14,6 +14,10 @@ namespace Bayanihand.App.Configuration
             CreateMap<ScheduleINV, ScheduleVM>().ReverseMap();
             CreateMap<PaymentProofINV, PaymentVM>().ReverseMap();
             CreateMap<InquiryINV, InquiryVM>().ReverseMap();
+<<<<<<< HEAD
+            CreateMap<InquiryINV, InquiryVM>().ReverseMap();
+=======
+>>>>>>> 1e0270f0eba07c853fc24663380a31d80329038d
         }
     }
 }

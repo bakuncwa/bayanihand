@@ -15,7 +15,11 @@ namespace Bayanihand.App.Controllers
         private readonly IPaymentRepo repoPay;
         private readonly IAdminRepo aDrepo;
 
+<<<<<<< HEAD
+        public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum,
+=======
         public CustomerController(AppDbContext dbc, IMapper mapper, IForumRepo repoForum, 
+>>>>>>> 1e0270f0eba07c853fc24663380a31d80329038d
             ISchedRepo repoSched, IPaymentRepo repoPay, IAdminRepo ADrepo)
         {
             this.dbc = dbc;
@@ -38,7 +42,7 @@ namespace Bayanihand.App.Controllers
                 Status = "Open"
             };
 
-            var forumList = new List<ForumVM> { forumData }; 
+            var forumList = new List<ForumVM> { forumData };
             //return View(mapper.Map<List<ForumVM>>(await repo.GetAllAsync()));
             return View(forumList);
         }
@@ -58,7 +62,7 @@ namespace Bayanihand.App.Controllers
                 {
                     model.DatePosted = DateTime.Now;
                     model.Status = "Open";
-                
+
                     await repoForum.AddAsync(mapper.Map<ForumINV>(model));
 
                     return RedirectToAction("Forum");
@@ -169,8 +173,13 @@ namespace Bayanihand.App.Controllers
                 {
                     InquiryINV entity = mapper.Map<InquiryINV>(model);
                     entity.DateInquired = DateTime.Now;
+<<<<<<< HEAD
+                    entity.HandymanID = 1;
+                    entity.CustomerID = 1;
+=======
                     entity.HandymanID = 1; 
                     entity.CustomerID = 1; 
+>>>>>>> 1e0270f0eba07c853fc24663380a31d80329038d
 
                     await aDrepo.AddAsync(entity);
 
@@ -209,9 +218,9 @@ namespace Bayanihand.App.Controllers
         public async Task<IActionResult> CheckIn(int ScheduleID)
         {
             //ScheduleINV data = await repoSched.GetAsync(ScheduleID);
-            
+
             ScheduleVM model = new();
-            
+
             model.Status = "Checked In";
 
             return RedirectToAction("JobSchedule", model);

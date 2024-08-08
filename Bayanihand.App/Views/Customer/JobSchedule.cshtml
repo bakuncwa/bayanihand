@@ -1,7 +1,7 @@
 ﻿@model List<ScheduleVM>
 
 <h3>Booked Jobs Schedule</h3>
-<hr/>
+<hr />
 
 <a asp-controller="Landing" asp-action="Index" class="btn btn-info" method="post">
     Go back
@@ -35,21 +35,21 @@
                 <td>@item.EndTime</td>
                 <td>@item.Status</td>
                 <td>
-                    @if(item.Status != "Checked In")
+                    @if (item.Status != "Checked In")
                     {
                         <button type="button" class="btn btn-danger btn-sm btnCheckIn" data-id="@item.ScheduleID">
                             Check In
                         </button>
 
-                        @if(item.Status != "Void")
+                        @if (item.Status != "Void")
                         {
                             <button type="button" class="btn btn-danger btn-sm btnVoid" data-id="@item.ScheduleID">
                                 Void
                             </button>
                         }
                     }
-                    
-                    @if(item.Status == "Checked In")
+
+                    @if (item.Status == "Checked In")
                     {
                         <a asp-controller="Customer" asp-action="Payment" asp-route-id="@item.ScheduleID" class="btn btn-secondary btn-sm">
                             Payment
@@ -73,7 +73,7 @@
     <input type="hidden" id="inputScheduleID" name="ScheduleID" />
 </form>
 
-@section Scripts{
+@section Scripts {
     <script>
         $('.btnCheckIn').click(function (e) {
             var id = $(this).data('id');

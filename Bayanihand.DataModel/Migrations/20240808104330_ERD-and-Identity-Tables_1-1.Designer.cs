@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bayanihand.DataModel.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240808083919_ERD-and-Identity-Tables_1-0")]
-    partial class ERDandIdentityTables_10
+    [Migration("20240808104330_ERD-and-Identity-Tables_1-1")]
+    partial class ERDandIdentityTables_11
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,6 +255,10 @@ namespace Bayanihand.DataModel.Migrations
 
                     b.Property<decimal>("SalaryRange")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("YearsOfExperience")
                         .HasColumnType("decimal(18,2)");

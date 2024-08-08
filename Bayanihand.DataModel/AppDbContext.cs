@@ -11,11 +11,6 @@ namespace Bayanihand.DataModel
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
-        //public AppDbContext() { }
-        //public AppDbContext(DbContextOptions options) : base(options)
-        //{
-        //}
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -25,10 +20,10 @@ namespace Bayanihand.DataModel
             if (!optionsBuilder.IsConfigured)
             {
                 // Almirol
-                optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
-                    "database=almirol_entprog; uid=eisensy_student; " +
-                    "pwd=Benilde@2020; integrated security=sspi; " +
-                    "trustservercertificate=true");
+                //optionsBuilder.UseSqlServer("server=GYALAPTOP\\SQLEXPRESS; " +
+                //    "database=almirol_entprog; uid=eisensy_student; " +
+                //    "pwd=Benilde@2020; integrated security=sspi; " +
+                //    "trustservercertificate=true");
 
                 // Gamoras
                 //optionsBuilder.UseSqlServer("server=LAPTOP-FRGK3TF6\\SQLEXPRESS; " +
@@ -36,10 +31,10 @@ namespace Bayanihand.DataModel
                 //    "trustservercertificate=true");
 
                 // Hacinas
-                //optionsBuilder.UseSqlServer(
-                //"Server=DESKTOP-5FF6P8K\\SQLEXPRESS;" +
-                //"Database=ENTPROG-Finals; Integrated Security=SSPI;" +
-                //"TrustServerCertificate=true");
+                optionsBuilder.UseSqlServer(
+                "Server=DESKTOP-5FF6P8K\\SQLEXPRESS;" +
+                "Database=ENTPROG-Finals; Integrated Security=SSPI;" +
+                "TrustServerCertificate=true");
 
                 // Lab
                 //optionsBuilder.UseSqlServer("server=DESKTOP-EDG1IN1\\SQLEXPRESS; " +

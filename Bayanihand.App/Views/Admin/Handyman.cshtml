@@ -29,17 +29,17 @@
                 <td></td>
                 <td>@item.Description</td>
                 <td>
-                <button type="submit"
-                    class="btn btn-outline-danger btnDelete"
-                    data-id="@item.InquiryID">
+                    <button type="submit"
+                            class="btn btn-outline-danger btnDelete"
+                            data-id="@item.InquiryID">
                         <i class="fas fa-remove"></i>
                         Delete
-                 </button>
-            </td>
-        </tr>
+                    </button>
+                </td>
+            </tr>
         }
     </tbody>
- </table>
+</table>
 
 <form id="DeleteForm" asp-controller="Admin" asp-action="Delete" method="post">
     <input type="hidden" id="FollowUpID" name="Id" value="" />

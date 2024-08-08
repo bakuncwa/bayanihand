@@ -1,0 +1,27 @@
+﻿@model HandymanProfileVM
+
+<div class="container">
+    <h2>Your Profile</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Welcome, @Model.FirstName @Model.LastName</h5>
+
+            <input asp-for="HandymanID" type="hidden" class="form-control" />
+            <input asp-for="UserId" type="hidden" class="form-control" />
+
+            <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+            <p class="card-text"><strong>Contact Number:</strong> @Model.ContactNo</p>
+            <p class="card-text"><strong>Address:</strong> @Model.Address</p>
+            <p class="card-text"><strong>Barangay No:</strong> @Model.BarangayNo</p>
+            <p class="card-text"><strong>Barangay Name:</strong> @Model.BarangayName</p>
+            <p class="card-text"><strong>Region:</strong> @Model.Region</p>
+            <p class="card-text"><strong>City:</strong> @Model.City</p>
+            <p class="card-text"><strong>ZIP Code:</strong> @Model.ZIPCode</p>
+            <p class="card-text"><strong>Salary Range:</strong> @Model.SalaryRange.ToString("C")</p>
+            <p class="card-text"><strong>Years of Experience:</strong> @Model.YearsOfExperience</p>
+
+            <a asp-controller="Handyman" asp-action="EditProfile" class="btn btn-primary">Edit Profile</a>
+        </div>
+    </div>
+</div>

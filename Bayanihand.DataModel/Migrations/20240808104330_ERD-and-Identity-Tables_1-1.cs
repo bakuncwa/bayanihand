@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Bayanihand.DataModel.Migrations
 {
     /// <inheritdoc />
-    public partial class ERDandIdentityTables_10 : Migration
+    public partial class ERDandIdentityTables_11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -246,6 +246,7 @@ namespace Bayanihand.DataModel.Migrations
                 columns: table => new
                 {
                     HandymanID = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),

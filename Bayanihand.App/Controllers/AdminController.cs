@@ -11,9 +11,9 @@ namespace Bayanihand.App.Controllers
         private readonly AppDbContext dbc;
         private readonly IMapper mapper;
         private readonly IForumRepo repo;
-        private readonly IAdminRepo ADrepo;     
+        private readonly IAdminRepo ADrepo;
 
-        public AdminController(AppDbContext dbc, IMapper mapper, IForumRepo repo, IAdminRepo ADRepo)    
+        public AdminController(AppDbContext dbc, IMapper mapper, IForumRepo repo, IAdminRepo ADRepo)
         {
             this.dbc = dbc;
             this.mapper = mapper;

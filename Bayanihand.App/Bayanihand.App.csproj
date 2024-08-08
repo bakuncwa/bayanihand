@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Bayanihand.Repository\Bayanihand.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Handyman\" />
-  </ItemGroup>
-
 </Project>

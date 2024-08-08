@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bayanihand.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,8 @@ namespace Bayanihand.Repository
         Task<T?> GetAsync(int? id);
         Task UpdateAsync(T entity);
         Task<bool> Exists(int? id);
+        Task<HandymanINV?> GetProfileByUserIdAsync(string userId);
+
+
     }
 }

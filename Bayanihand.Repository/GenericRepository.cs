@@ -69,5 +69,11 @@ namespace Bayanihand.Repository
 
             return;
         }
+
+        public async Task<HandymanINV?> GetProfileByUserIdAsync(string userId)
+        {
+            return await dbc.HandymanINV
+                .FirstOrDefaultAsync(h => h.UserId == userId);
+        }
     }
 }

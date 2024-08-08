@@ -1,6 +1,7 @@
 ﻿using Bayanihand.App.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Bayanihand.App.Controllers
 {
@@ -104,7 +105,7 @@ namespace Bayanihand.App.Controllers
                     if (!string.IsNullOrEmpty(returnUrl))
                         return LocalRedirect(returnUrl);
                     else
-                        return LocalRedirect("/Landing/Index");
+                        return LocalRedirect("/Handyman/Profile");
                 }
                 else
                 {

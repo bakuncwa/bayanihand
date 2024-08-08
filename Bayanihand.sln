@@ -5,9 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bayanihand.DataModel", "Bayanihand.DataModel\Bayanihand.DataModel.csproj", "{F49C6CF2-7793-4C29-A6D6-2F866E4E3488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.App", "Bayanihand.App\Bayanihand.App.csproj", "{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bayanihand.App", "Bayanihand.App\Bayanihand.App.csproj", "{7885F0C8-5D1B-4AE8-9BB6-697E32F7B711}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bayanihand.Repository", "Bayanihand.Repository\Bayanihand.Repository.csproj", "{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bayanihand.Repository", "Bayanihand.Repository\Bayanihand.Repository.csproj", "{FF36188A-DC6D-42CB-A1DD-FF332BE7FB76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

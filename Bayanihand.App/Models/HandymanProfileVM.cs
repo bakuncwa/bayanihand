@@ -3,6 +3,7 @@
     public class HandymanProfileVM
     {
         public int HandymanID { get; set; }
+        public string UserId { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public string ContactNo { get; set; } = string.Empty;
