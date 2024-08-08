@@ -75,7 +75,7 @@ namespace Bayanihand.App
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                var roles = new[] { "Admin", "Handyman", "Customer" };
+                var roles = new[] { "Admin" };
 
                 foreach (var r in roles)
                 {
